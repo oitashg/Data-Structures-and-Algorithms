@@ -45,7 +45,7 @@ public:
         return dp[n];
     }
 
-    //Space optimization method
+    //Space optimization method(O(1))
     int fun4(int n){
         //base case
         int prev1 = 0, prev = 1;
