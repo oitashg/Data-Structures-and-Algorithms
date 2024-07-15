@@ -1,87 +1,61 @@
-#include<iostream>
-#include<unordered_map>
-#include<list>
-#include<queue>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-class Graph{
+class Solution {
+  public:
+    //-----------------------------------------------------------------------
 
-public:
-    unordered_map<int, list<int>> adj;
-
-    void addEdge(int u, int v, bool direction){
-        adj[u].push_back(v);
-        if(direction == 0)
-            adj[v].push_back(u);
-    }
-
-    void printAdjList(){
-        for(auto i: adj){
-            cout<<i.first<<" -> ";
-            for(auto j: i.second){
-                cout<<j<<",";
-            }
-            cout<<endl;
-        }
-    }
-
-    void dfs(unordered_map<int, list<int>> &adj, unordered_map<int, bool> &visited, int node, vector<int> &ans){
+    //recursive function
+    void dfs(int node, vector<int> vis, vector<int> adj[], vector<int>& ans){
+        vis[node] = 1;
         ans.push_back(node);
-        visited[node] = 1;
-
-        for(auto neighbours: adj[node]){
-            if(!visited[neighbours]){
-                dfs(adj, visited, neighbours, ans);
-            }
+        
+        for(auto it: adj[node]){
+            if(!vis[it])
+                dfs(it, vis, adj, ans);
         }
     }
-
-    vector<int> dfsTraversal(int node, vector<pair<int, int>> &edges){
-        unordered_map<int, bool> visited;
+    
+    // Function to return a list containing the DFS traversal of the graph.
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<int> vis(V,0);
+        int start = 0;
+        
         vector<int> ans;
-
-        //for disconnected graph
-        for(int i=1; i<=node; i++){
-            if(!visited[i])
-                dfs(adj, visited, i, ans);
-        }
-
-        cout<<"The DFS traversal is -> "<<endl;
-        for(int i=0; i<ans.size(); i++){
-            cout<<ans[i]<<" ";
-        }
-
+        
+        dfs(start, vis, adj, ans);
         return ans;
     }
+
+    //-----------------------------------------------------------------------
 };
 
-int main(){
-    int n,m,d;
-    Graph g;
-    vector<pair<int,int>> edges;
+//{ Driver Code Starts.
+int main() {
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int V, E;
+        cin >> V >> E;
 
-    cout<<"Enter the no. of nodes - ";
-    cin>>n;
-
-    cout<<"Enter the no. of edges - ";
-    cin>>m;
-
-    cout<<"Enter the direction - ";
-    cin>>d;
-
-    //adjacency list creation
-    cout<<"Enter the edges ->"<<endl;
-    for(int i=0; i<m; i++){
-        int u,v;
-        cin>>u>>v;
-
-        edges.push_back({u,v});
-
-        g.addEdge(u,v,d);
+        vector<int> adj[1000];
+        
+        //undirected graph
+        for (int i = 0; i < E; i++) {
+            int u, v;
+            cin >> u >> v;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        // string s1;
+        // cin>>s1;
+        Solution obj;
+        vector<int> ans = obj.dfsOfGraph(V, adj);
+        for (int i = 0; i < ans.size(); i++) {
+            cout << ans[i] << " ";
+        }
+        cout << endl;
     }
-
-    g.printAdjList();
-    g.dfsTraversal(n, edges);
-
     return 0;
 }

@@ -1,97 +1,68 @@
-#include<iostream>
-#include<unordered_map>
-#include<list>
-#include<queue>
+//{ Driver Code Starts
+#include <iostream>
+#include <vector>
+#include <queue>
 using namespace std;
 
-class Graph{
+class Solution {
+  public:
 
-public:
-    unordered_map<int, list<int>> adj;
+    // Function to return Breadth First Traversal of given graph.
 
-    void addEdge(int u, int v, bool direction){
-        adj[u].push_back(v);
-        if(direction == 0)
-            adj[v].push_back(u);
-    }
-
-    void printAdjList(){
-        for(auto i: adj){
-            cout<<i.first<<" -> ";
-            for(auto j: i.second){
-                cout<<j<<",";
-            }
-            cout<<endl;
-        }
-    }
-
-    void bfs(unordered_map<int, list<int>> &adj, unordered_map<int, bool> &visited, int node, vector<int> &ans){
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        vector<int> ans;
+        
+        vector<int> vis(V, 0);
+        vis[0] = 1;
+        
         queue<int> q;
-
-        q.push(node);
-        visited[node] = true;
-
+        q.push(0);
+        
         while(!q.empty()){
-            int frontNode = q.front();
+            int node = q.front();
             q.pop();
-
-            ans.push_back(frontNode);
-
-            for(auto neighbours: adj[frontNode]){
-                if(!visited[neighbours]){
-                    q.push(neighbours);
-                    visited[neighbours] = true;
+            ans.push_back(node);
+            
+            //traversing the adjacency list of the popped node
+            for(auto it: adj[node]){
+                if(!vis[it]){
+                    vis[it] = 1;
+                    q.push(it);
                 }
             }
         }
-    }
-
-    vector<int> bfsTraversal(int node, vector<pair<int, int>> &edges){
-        unordered_map<int, bool> visited;
-        vector<int> ans;
-
-        //for disconnected graph
-        for(int i=1; i<=node; i++){
-            if(!visited[i])
-                bfs(adj, visited, i, ans);
-        }
-
-        cout<<"The BFS traversal is -> "<<endl;
-        for(int i=0; i<ans.size(); i++){
-            cout<<ans[i]<<" ";
-        }
-
+        
         return ans;
     }
+
+    //-------------------------------------------------------------------------
 };
 
-int main(){
-    int n,m,d;
-    Graph g;
-    vector<pair<int,int>> edges;
 
-    cout<<"Enter the no. of nodes - ";
-    cin>>n;
+int main() {
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int V, E;
+        cin >> V >> E;
 
-    cout<<"Enter the no. of edges - ";
-    cin>>m;
-
-    cout<<"Enter the direction - ";
-    cin>>d;
-
-    //adjacency list creation
-    cout<<"Enter the edges ->"<<endl;
-    for(int i=0; i<m; i++){
-        int u,v;
-        cin>>u>>v;
-
-        edges.push_back({u,v});
-
-        g.addEdge(u,v,d);
+        vector<int> adj[1000];
+        
+        //directed graph
+        for (int i = 0; i < E; i++) {
+            int u, v;
+            cin >> u >> v;
+            adj[u].push_back(v);
+            // 		adj[v].push_back(u);
+        }
+        // string s1;
+        // cin>>s1;
+        Solution obj;
+        vector<int> ans = obj.bfsOfGraph(V, adj);
+        for (int i = 0; i < ans.size(); i++) {
+            cout << ans[i] << " ";
+        }
+        cout << endl;
     }
-
-    g.printAdjList();
-    g.bfsTraversal(n, edges);
-
     return 0;
 }
