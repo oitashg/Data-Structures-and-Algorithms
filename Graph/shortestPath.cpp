@@ -1,214 +1,145 @@
-//--------------------For undirected graphs-------------------------
-
-// #include<iostream>
-// #include<algorithm> //include this to call the reverse function in vector
-// #include<unordered_map>
-// #include<list>
-// #include<queue>
-// using namespace std;
-
-// class Graph{
-
-// public:
-//     unordered_map<int, list<int>> adj;
-
-//     void addEdge(int u, int v, bool direction){
-//         adj[u].push_back(v);
-//         if(direction == 0)
-//             adj[v].push_back(u);
-//     }
-
-//     void printAdjList(){
-//         for(auto i: adj){
-//             cout<<i.first<<" -> ";
-//             for(auto j: i.second){
-//                 cout<<j<<",";
-//             }
-//             cout<<endl;
-//         }
-//     }
-
-//     void shortestPath(int src, int dest){
-//         unordered_map<int,bool> visited;
-//         unordered_map<int,int> parent;
-//         queue<int> q;
-//         vector<int> ans;
-
-//         q.push(src);
-//         visited[src] = 1;
-//         parent[src] = -1;
-
-//         while(!q.empty()){
-//             int frontNode = q.front();
-//             q.pop();
-
-//             for(auto neighbours: adj[frontNode]){
-//                 if(!visited[neighbours]){
-//                     q.push(neighbours);
-//                     visited[neighbours] = 1;
-//                     parent[neighbours] = frontNode;
-//                 }
-//             }
-//         }
-
-//         int currentNode = dest;
-//         ans.push_back(currentNode);
-//         while(currentNode != src){
-//             currentNode = parent[currentNode];
-//             ans.push_back(currentNode);
-//         }
-
-//         reverse(ans.begin(), ans.end());
-
-//         cout<<"The shortest path is - "<<endl;
-//         for(int i=0; i<ans.size(); i++){
-//             cout<<ans[i]<<" ";
-//         }
-//     }
-// };
-
-// int main(){
-//     int n,m,s,t;
-//     Graph g;
-//     vector<pair<int,int>> edges;
-
-//     cout<<"Enter the no. of nodes - ";
-//     cin>>n;
-
-//     cout<<"Enter the no. of edges - ";
-//     cin>>m;
-
-//     cout<<"Enter the source node - ";
-//     cin>>s;
-
-//     cout<<"Enter the destination node - ";
-//     cin>>t;
-
-//     //adjacency list creation
-//     cout<<"Enter the edges ->"<<endl;
-//     for(int i=0; i<m; i++){
-//         int u,v;
-//         cin>>u>>v;
-
-//         edges.push_back({u,v});
-
-//         g.addEdge(u,v,0);
-//     }
-
-//     g.printAdjList();
-//     g.shortestPath(s, t);
-
-//     return 0;
-// }
-
-//-----------------------For directed (weighted) acyclic graphs----------------------------
-
-#include<iostream>
-#include<unordered_map>
-#include<list>
-#include<stack>
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <limits>
+#include <unordered_map>
+#include <list>
 #include<queue>
-#include<limits.h>
 using namespace std;
 
-class Graph{
 
-public:
-    unordered_map<int, list<pair<int,int>>> adj;
+class Solution {
+  public:
+    //----------------For Directed Acyclic Graphs(DAG)(weighted)---------------------
 
-    void addEdge(int u, int v, int w){
-        adj[u].push_back({v,w});
-    }
-
-    void printAdjList(){
-        for(auto i: adj){
-            cout<<i.first<<" -> ";
-            for(auto j: i.second){
-                cout<<"["<<j.first<<" "<<j.second<<"]"<<",";
-            }
-            cout<<endl;
+    void topoSort(int node, vector<int>& vis, vector<pair<int,int>> adj[], stack<int>& s){
+        vis[node] = 1;
+        
+        for(auto it: adj[node]){
+            int v = it.first;
+            if(!vis[v])
+                topoSort(v, vis, adj, s);
         }
-    }
-
-    void topoSort(int node, unordered_map<int, bool>& visited, stack<int>& s){
-        visited[node] = 1;
-
-        for(auto neighbours: adj[node]){
-            if(!visited[neighbours.first]){
-                topoSort(neighbours.first, visited, s);
-            }
-        }
-
+        
         s.push(node);
     }
-
-    void shortestPath(int node, vector<pair<int, pair<int,int>>> &edges, int src){
-        unordered_map<int, bool> visited;
+    
+    vector<int> shortestPath(int N,int M, vector<vector<int>>& e){
+        vector<pair<int,int>> adj[1000];
+        
+        //creating the adjacency list
+        for(int i=0; i<M; i++){
+            int u = e[i][0];
+            int v = e[i][1];
+            int wt = e[i][2];
+            
+            adj[u].push_back({v,wt});
+        }
+        
+        //do the topo sort
+        vector<int> vis(N,0);
         stack<int> s;
-
-        for(int i=0; i<node; i++){
-            if(!visited[i]){
-                topoSort(i, visited, s);
-            }
+        
+        for(int i=0; i<N; i++){
+            if(!vis[i])
+                topoSort(i, vis, adj, s);
         }
-
-        //vector<int> dist(INT_MAX);  //don't do this
-        vector<int> dist(node);
-
-        for(int i=0; i<node; i++){
-            dist[i] = INT_MAX;
-        }
-
-        dist[src] = 0;
-
+        
+        //do the distance calculation
+        vector<int> dist(N, 1e9);
+        
+        dist[0] = 0;
+        
         while(!s.empty()){
-            int top = s.top();
+            int node = s.top();
             s.pop();
-
-            if(dist[top] != INT_MAX){
-                for(auto neighbours: adj[top]){
-                    if(dist[top] + neighbours.second < dist[neighbours.first])
-                        dist[neighbours.first] = dist[top] + neighbours.second;
+            
+            for(auto it: adj[node]){
+                int v = it.first;
+                int wt = it.second;
+                
+                if(dist[node] + wt < dist[v]){
+                    dist[v] = dist[node] + wt;
                 }
             }
         }
-
-        for(int i=0; i<dist.size(); i++){
-            cout<<dist[i]<<" ";
+        
+        for(int i=0; i<N; i++){
+            if(dist[i] == 1e9)
+                dist[i] = -1;
         }
+        
+        return dist;
     }
+
+    //-----------------------For undirected weighted graphs----------------------------
+
+    vector<int> shortestPath(vector<vector<int>>& e, int N,int M, int src){
+        vector<pair<int,int>> adj[1000];
+        
+        //creating adjacency list
+        for(int i=0; i<M; i++){
+            int u = e[i][0];
+            int v = e[i][1];
+            int wt = 1; //can be any weight
+            
+            adj[u].push_back({v,wt});
+            adj[v].push_back({u,wt});
+        }
+        
+        vector<int> dist(N, 1e9);
+        dist[src] = 0;
+        
+        queue<pair<int,int>> q;
+        q.push({src,0});
+        
+        while(!q.empty()){
+            int node = q.front().first;
+            q.pop();
+            
+            for(auto it: adj[node]){
+                int v = it.first;
+                int wt = it.second;
+                
+                if(dist[node] + wt < dist[v]){
+                    dist[v] = dist[node] + wt;
+                    q.push({v,dist[v]});
+                }
+            }
+        }
+        
+        for(int i=0; i<N; i++){
+            if(dist[i] == 1e9)
+                dist[i] = -1;
+        }
+        
+        return dist;
+    }
+
+    //----------------------------------------------------------------------------------
 };
 
-int main(){
-    int n,m,s,t;
-    Graph g;
-    vector<pair<int,pair<int,int>>> edges;
 
-    cout<<"Enter the no. of nodes - ";
-    cin>>n;
-
-    cout<<"Enter the no. of edges - ";
-    cin>>m;
-
-    cout<<"Enter the source node - ";
-    cin>>s;
-
-    // cout<<"Enter the destination node - ";
-    // cin>>t;
-
-    //adjacency list creation
-    cout<<"Enter the edges ->"<<endl;
-    for(int i=0; i<m; i++){
-        int u,v,w;
-        cin>>u>>v>>w;
-
-        edges.push_back({u,{v,w}});
-
-        g.addEdge(u,v,w);
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        vector<vector<int>> edges;
+        for(int i=0; i<m; ++i){
+            vector<int> temp;
+            for(int j=0; j<3; ++j){
+                int x; cin>>x;
+                temp.push_back(x);
+            }
+            edges.push_back(temp);
+        }
+        Solution obj;
+        vector<int> res = obj.shortestPath(n, m, edges);
+        for (auto x : res) {
+            cout << x << " ";
+        }
+        cout << "\n";
     }
-
-    g.printAdjList();
-    g.shortestPath(n, edges, s);
-
-    return 0;
 }
