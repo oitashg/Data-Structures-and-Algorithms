@@ -10,7 +10,7 @@ class Solution
 public:
     //-------------------------------Undirected Graph-------------------------------------
 
-    //------------------Detect cycle using BFS-----------------------------
+    //------------------------Detect cycle using BFS-----------------------------
 
     bool detectCycleBfs(int src, vector<int> adj[], vector<int> &vis)
     {
@@ -136,7 +136,41 @@ public:
         return false;
     }
 
-    //----------------------------------------------------------------
+    //-----------------------Detect cycle using BFS(Kahn's Algorithm)-----------------------------
+
+    bool isCyclic(int V, vector<int> adj[]) {
+        vector<int> indegree(V);
+	    
+	    for(int i=0; i<V; i++){
+	        for(auto it: adj[i])
+	            indegree[it]++;
+	    }
+	    
+	    int cnt = 0;
+	    queue<int> q;
+	    
+	    for(int i=0; i<V; i++){
+	        if(indegree[i] == 0)
+	            q.push(i);
+	    }
+	    
+	    while(!q.empty()){
+	        int node = q.front();
+	        q.pop();
+	        cnt++;
+	        
+	        for(auto it: adj[node]){
+	            indegree[it]--;
+	            if(indegree[it] == 0)
+	                q.push(it);
+	        }
+	    }
+	    
+	    if(cnt == V) return false;
+	    return true;
+    }
+
+    //-----------------------------------------------------------------------
 };
 
 int main()
