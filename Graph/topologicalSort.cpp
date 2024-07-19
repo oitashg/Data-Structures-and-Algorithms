@@ -80,12 +80,6 @@ class Solution
     //-------------------------------------------------------------------
 };
 
-/*  Function to check if elements returned by user
-*   contains the elements in topological sorted form
-*   V: number of vertices
-*   *res: array containing elements in topological sorted form
-*   adj[]: graph input
-*/
 int check(int V, vector <int> &res, vector<int> adj[]) {
     
     if(V!=res.size())
