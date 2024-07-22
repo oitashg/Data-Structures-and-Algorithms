@@ -26,7 +26,7 @@ class Trie{
             root = new TrieNode('\0'); //root started with null character
         }
 
-        //-------------------------------------------------------------------
+        //---------------------Insert Word Funtion----------------------------------------
 
         //recursive functions
         void insertUtil(TrieNode* root, string word){
@@ -60,7 +60,7 @@ class Trie{
             insertUtil(root, word);
         }
 
-        //-------------------------------------------------------------------
+        //-----------------------Search Word Function--------------------------------------------
 
         bool searchUtil(TrieNode* root, string word){
             //base case
@@ -90,7 +90,7 @@ class Trie{
             return searchUtil(root, word);
         }
 
-        //----------------------------------------------------------------------
+        //-------------------------Word Startswith Fuction--------------------------------
 
         bool startsWithUtil(TrieNode* root, string prefix){
             //base case
@@ -118,7 +118,7 @@ class Trie{
             return startsWithUtil(root, prefix);
         }
 
-        //----------------------------------------------------------------
+        //-----------------------Remove Word Funtion-----------------------------------------
         
         void removeUtil(TrieNode* root, string word){
             //base case
