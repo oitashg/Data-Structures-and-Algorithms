@@ -26,6 +26,8 @@ class Trie{
             root = new TrieNode('\0'); //root started with null character
         }
 
+        //-------------------------------------------------------------------
+
         //recursive functions
         void insertUtil(TrieNode* root, string word){
             //base case
@@ -53,6 +55,13 @@ class Trie{
             insertUtil(child, word.substr(1));
         }
 
+        //insert word function
+        void insertWord(string word){
+            insertUtil(root, word);
+        }
+
+        //-------------------------------------------------------------------
+
         bool searchUtil(TrieNode* root, string word){
             //base case
             if(word.length() == 0){
@@ -76,6 +85,13 @@ class Trie{
             return searchUtil(child, word.substr(1));
         }
 
+        //search word fucntion
+        bool searchWord(string word){
+            return searchUtil(root, word);
+        }
+
+        //----------------------------------------------------------------------
+
         bool startsWithUtil(TrieNode* root, string prefix){
             //base case
             if(prefix.length() == 0){
@@ -96,6 +112,13 @@ class Trie{
             //recursion
             return startsWithUtil(child, prefix.substr(1));
         }
+
+        //starts with function
+        bool startsWith(string prefix) {
+            return startsWithUtil(root, prefix);
+        }
+
+        //----------------------------------------------------------------
         
         void removeUtil(TrieNode* root, string word){
             //base case
@@ -127,25 +150,12 @@ class Trie{
             removeUtil(child, word.substr(1));
         }
 
-        //insert word function
-        void insertWord(string word){
-            insertUtil(root, word);
-        }
-
-        //search word fucntion
-        bool searchWord(string word){
-            return searchUtil(root, word);
-        }
-
-        //starts with function
-        bool startsWith(string prefix) {
-            return startsWithUtil(root, prefix);
-        }
-
         //remove word function
         void removeWord(string word){
             removeUtil(root, word);
         }
+
+        //-------------------------------------------------------------------
 };
 
 int main(){
