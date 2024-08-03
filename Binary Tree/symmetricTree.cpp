@@ -16,7 +16,7 @@ struct TreeNode
 
 class Solution {
 public:
-    //--------------------------------------------------------------------
+    //-----------------------------------------------------------------------
 
     bool f(TreeNode* left, TreeNode* right){
         if(left == NULL || right == NULL)
