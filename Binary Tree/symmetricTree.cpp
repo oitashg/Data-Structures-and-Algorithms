@@ -16,6 +16,8 @@ struct TreeNode
 
 class Solution {
 public:
+    //--------------------------------------------------------------------
+
     bool f(TreeNode* left, TreeNode* right){
         if(left == NULL || right == NULL)
             return left == right;
@@ -31,4 +33,6 @@ public:
 
         return f(root->left, root->right);
     }
+
+    //-----------------------------------------------------------------------
 };
