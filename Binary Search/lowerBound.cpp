@@ -3,6 +3,8 @@
 using namespace std;
 
 //---------------Implementation of lower bound---------------------------
+// smallest index where element at that index is greater than or equal to x
+// arr[idx] >= x
 
 int lowerBound(vector<int> arr, int n, int x) {
 	int low = 0, high = n-1;

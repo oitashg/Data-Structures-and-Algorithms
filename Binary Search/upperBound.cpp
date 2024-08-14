@@ -3,6 +3,8 @@
 using namespace std;
 
 //---------------Implementation of upper bound---------------------------
+// smallest index where element at that index is greater than x
+// arr[idx] > x
 
 int upperBound(vector<int> &arr, int x, int n){
 	int low = 0, high = n-1;
