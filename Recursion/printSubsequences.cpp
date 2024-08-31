@@ -26,8 +26,8 @@ void printSubsequences(int idx, int n, int arr[], vector<int>& v){
     printSubsequences(idx+1, n, arr, v);
 }
 
-//-------------------------By Power Set-------------------------------------------
-//-------------------------Note------------------------------
+//-------------------------By Power Set(TC- (2^n)*N)-------------------------------------------
+//-------------------------------Note------------------------------
 //To check whether ith bit of a number 'num' is set or not, we do -->
 //(num & (1<<i)) --> If it comes 1 then the ith bit of num is set bit or 1 otherwise not
 
