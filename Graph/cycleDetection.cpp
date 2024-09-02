@@ -31,6 +31,11 @@ public:
                     vis[it] = 1;
                     q.push({it, node});
                 }
+                //neighbour of a node is already visited means---
+                //The neighbour of a node is visited means the node is aleady visited 
+                //That neighbour must be the parent of the present node
+                //Because a node and its parent are always neighbours
+                //But if that neighbour and the parent of the present node are different that means cycle present
                 else if (parent != it)
                     return true;
             }
