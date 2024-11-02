@@ -16,6 +16,15 @@ vector<string> split_sentence(string& s){
     //extract words using getline with space as delimiter
     while(getline(ss, word, ' ')) v.push_back(word);
 
+    //--------------------or-----------------------------
+
+    // Extract words from the sentence
+    while (ss >> word) {
+        
+        // Add the word to the vector
+        v.push_back(word);
+    }
+
     return v;
 }
 
