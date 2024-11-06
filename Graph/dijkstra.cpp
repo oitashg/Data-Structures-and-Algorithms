@@ -11,7 +11,8 @@ using namespace std;
 class Solution
 {
 public:
-    //---------------------Dijkstra using priority queue---------------------------------
+    //---------Function to find the shortest distance of all the vertices from the source vertex-------
+    //----------------------------Dijkstra using priority queue---------------------------------
 
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {

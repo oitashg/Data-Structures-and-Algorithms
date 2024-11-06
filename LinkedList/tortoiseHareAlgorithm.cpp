@@ -24,7 +24,7 @@ public:
         ListNode *slow = head;
         ListNode *fast = head;
 
-        // when length of ll is odd, fast will end that last node and for even length it will end at null
+        // when length of ll is odd, fast will end  at last node and for even length it will end at null
         while (fast != NULL && fast->next != NULL)
         {
             slow = slow->next;
