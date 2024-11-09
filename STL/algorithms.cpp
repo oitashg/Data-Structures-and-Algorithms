@@ -57,8 +57,10 @@ void explainAlgorithm(){
     }
     while(next_permutation(s.begin(), s.end()));  //print the next permutations
 
-    //--------------------------------------------------------------------------
+    //----------------Maximum and Minimum element from a vector-------------------
 
     int maxi = *max_element(a, a+n);  //prints max element from an array or vector
     int maxi = *min_element(a, a+n);  //prints min element from an array or vector
+
+    //----------------------------------------------------------------------------
 }
