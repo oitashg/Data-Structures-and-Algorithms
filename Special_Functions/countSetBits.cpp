@@ -21,6 +21,18 @@ int countSetBits2(int n){
     return cnt;
 }
 
+//----------------------------T.C - O(31)--------------------------------------
+
+int countSetBits3(int n){
+    int cnt = 0;
+
+    for(int i=0; i<31; i++){
+        if(n & (1 << i)) cnt++;
+    }
+
+    return cnt;
+}
+
 //-----------------------------------------------------------------------------
 //There is a built-in fucntion __builtin_popcount() which directly returns the number of set bits in an integer
 
@@ -35,6 +47,7 @@ int cnt = __builtin_popcountll(num);   //for long long
 int main(){
     int ans = countSetBits(16);
     int ans2 = countSetBits2(16);
+    int ans2 = countSetBits3(16);
     cout<<ans<<endl;
     cout<<ans2;
     return 0;
