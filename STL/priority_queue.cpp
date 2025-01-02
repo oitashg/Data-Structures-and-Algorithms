@@ -15,6 +15,9 @@ void explainStack(){
     pq.push(4);        //{4,1}
     pq.emplace(3);     //{4,3,1}
 
+    pq.emplace(3,5);   //{{3,5}} Pair can be added like this 
+    pq.emplace(6,7);   //{{3,5}, {6,7}}  
+
     cout<<pq.top();    //4
 
     pq.pop();          //{3,1}

@@ -34,6 +34,20 @@ int countSetBits3(int n){
 }
 
 //-----------------------------------------------------------------------------
+
+int countSetBit4(int n){
+    int cnt = 0;
+
+    while(n > 0){
+        if(n % 2 == 1) cnt++;
+        n /= 2;
+    }
+
+    return cnt;
+}
+
+//-------------------------------------------------------------------------------
+
 //There is a built-in fucntion __builtin_popcount() which directly returns the number of set bits in an integer
 
 int num = 7;
@@ -51,4 +65,4 @@ int main(){
     cout<<ans<<endl;
     cout<<ans2;
     return 0;
-}
+}    
