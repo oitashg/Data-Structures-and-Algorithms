@@ -55,4 +55,14 @@ int xorInRange(int l, int r){
     return (left ^ right);
 }
 
-//----------------------------------------------------------------------------
+//---------------------------------Minimize a XOR--------------------------------
+
+int num1 = 10, num2 = 0;
+int ans = num2 ^ num1;
+
+//min value of answer can be 0 if num1 and num2 are equal i.e 10. XOR of equal numbers return 0
+//But if we want to minimize the value of ans, then we have to keep num2 close to 10(if not equal to 10)
+//To create nums like that, we have to traverse the bits from left to right(31->0) and match it with num1
+//If most significant bits matches, then the num2 is likely to be close to num1 as difference will be less
+
+//---------------------------------------------------------------------------------
