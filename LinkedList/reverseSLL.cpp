@@ -15,12 +15,12 @@ class Solution
 public:
     //----------------------------------------------------
 
-    ListNode *reverseList(ListNode *head)
+    ListNode *reverseSLL(ListNode *head)
     {
         if (head == NULL || head->next == NULL)
             return head;
 
-        ListNode *newHead = reverseList(head->next);
+        ListNode *newHead = reverseSLL(head->next);
 
         ListNode *front = head->next;
         front->next = head;

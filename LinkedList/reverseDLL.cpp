@@ -5,24 +5,24 @@ class Node
 {
 public:
     int data;
-    Node *next,*prev;
+    Node *next,*back;
     Node()
     {
         this->data = 0;
         next = NULL;
-        prev= NULL;
+        back= NULL;
     }
     Node(int data)
     {
         this->data = data; 
         this->next = NULL;
-        this->prev= NULL;
+        this->back = NULL;
     }
     Node(int data, Node* next, Node *prev)
     {
         this->data = data;
         this->next = next;
-        this->prev= prev;
+        this->back= prev;
     }
 };
 
@@ -41,12 +41,12 @@ Node* reverseDLL(Node* head)
     Node* current = head;
 
     while(current != NULL){
-        prev = current->prev;
-        current->prev = current->next;
+        prev = current->back;
+        current->back = current->next;
         current->next = prev;
-        current = current->prev;
+        current = current->back;
     }  
 
-    return prev->prev;
+    return prev->back;
 }
 

@@ -37,7 +37,7 @@ Node* insertHead(Node* head, int val){
 
 Node* insertTail(Node* head, int val){
     if(head == NULL){
-        //as tail node so next will point to null always
+        //no tail node so next will point to null always
         return new Node(val);
     }
 

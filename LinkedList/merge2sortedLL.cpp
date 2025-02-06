@@ -13,9 +13,9 @@ struct ListNode
 class Solution
 {
 public:
-    //--------------------------------------------------------------
+    //-------------------------By Iterative Method-------------------------------------
     
-    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+    ListNode *mergeTwoLists1(ListNode *list1, ListNode *list2)
     {
         if (list1 == NULL && list2 == NULL)
             return NULL;
@@ -54,5 +54,23 @@ public:
         return dummy->next;
     }
 
-    //----------------------------------------------------------
+    //--------------------------By recursion--------------------------------------------
+
+    ListNode* mergeTwoLists2(ListNode* l1, ListNode* l2) {
+        // if l1 is NULL then ans is l2
+        if (l1==NULL) {
+            return l2;
+        }
+        if (l2==NULL) {
+            return l1;
+        }
+        if (l1->val <= l2->val) {
+            l1->next = mergeTwoLists2(l1->next,l2);
+            return l1;
+        }
+        else {
+            l2->next = mergeTwoLists2(l1,l2->next);
+            return l2;
+        }
+    }
 };
