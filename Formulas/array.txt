@@ -1,0 +1,4 @@
+No. of subarrays in an array of size n = n*(n+1)/2
+
+The count of subarrays with an odd product is equal to the total number of continuous odd elements present in the array. 
+Therefore, count of subarrays with even product = (Total number of subarrays – Subarrays with the odd product).
