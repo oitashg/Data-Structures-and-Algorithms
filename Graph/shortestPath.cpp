@@ -7,6 +7,8 @@
 #include<queue>
 using namespace std;
 
+//------To calculate shortest path for any type of graph(no -ve edges), we can simply use Dijkstra algorithm--------
+//-----------------------If -ve edge present, then use Bellman Ford or Floyd Warshall Algorithm----------------
 
 class Solution {
   public:

@@ -3,6 +3,9 @@
 #include <algorithm>
 using namespace std;
 
+//-------------------------Only applicable for directed graphs---------------------------
+//If graph is undirected, then convert it to directed graph by giving arrows both side with same edge weight
+
 //-----------------------Single source shortest path algorithm---------------------------
 //--------------------Applicable to negative edges or negative cycle---------------------
 //----------------------------------TC- O(VxE)-------------------------------------------
@@ -28,7 +31,13 @@ class Solution {
             }
         }
         
+        // A negative cycle is a cycle whose edges are such that the sum of their weights is a negative value
+        
         //Nth relaxation for checking negative cycle
+        //If no -ve cycle present, then the dist vector should be filled in n-1 iterations
+        //The logic behind (n-1) is we have to pass atmost (n-1) edges to move from one node to other if n vertices are there
+        //But after n-1 iterations, if the dist vector changes still that means negative cycle present
+
         for(auto it: edges){
             int u = it[0];
             int v = it[1];

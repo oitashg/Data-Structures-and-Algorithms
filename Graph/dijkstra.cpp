@@ -61,6 +61,9 @@ public:
                 
                 if(dis + edgeW < dist[adjNode]){
                     //check if already visited/reached by someone or not
+                    //if the node has been already been visited by someone, the entry must be prrsent in set
+                    //now, when we can reach the node in a smaller distance, there is no need of keeping that {distance,node} pair in set
+                    //that's why, we remove that and it can't be done in priority queue
                     if(dist[adjNode] != 1e9)
                         st.erase({dist[adjNode], adjNode});
                         
