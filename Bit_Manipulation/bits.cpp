@@ -55,3 +55,23 @@ bool checkPowerOf2(int n){
 
 //(a << n) == a*(2^n) -> Left shift
 //(a >> n) == a/(2^n) -> Right shift
+
+//--------------------------------------------------------------------------------------------
+
+int main(){
+    int a = 5;
+    int b = 2;
+
+    //It returns the integer number after changing the bit
+    int num = a & (1<<b);
+
+    //It return the bit value at that position i.e 0 or 1
+    int bit = (a>>b) & 1;
+
+    //returns the number after setting the bit at that position(if not set)
+    int ans = a | (1<<b);
+
+    cout<<num<<" "<<bit<<" "<<ans;
+}
+
+//-----------------------------------------------------------------------------------------
