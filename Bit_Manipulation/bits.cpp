@@ -59,8 +59,8 @@ bool checkPowerOf2(int n){
 //--------------------------------------------------------------------------------------------
 
 int main(){
-    int a = 5;
-    int b = 2;
+    int a = 5; //integer
+    int b = 2; //position
 
     //It returns the integer number after changing the bit
     int num = a & (1<<b);
