@@ -1,0 +1,1 @@
+//Maximum no. of nodes in ith level of a binary tree is (2^(i-1) or (1<<(i-1)))
