@@ -41,7 +41,9 @@ public:
     vector<int> articulationPoints(int V, vector<int>adj[]) {
         vector<int> marked(V,0);
         vector<int> vis(V,0);
+        // time insertion array of nodes i.e the time at which the node is visited
         vector<int> t(V);
+        // lowest time array among all the adjacent nodes of a node
         vector<int> low(V);
         
         dfs(0, -1, vis, adj, t, low, marked);
