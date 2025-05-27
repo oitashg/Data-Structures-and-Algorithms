@@ -14,6 +14,7 @@ int matrixMultiplication(vector<int> &a, int N)
         for(int j=i+1; j<N; j++){
 
             int mini = 1e9;
+            //to try all the partitions from i to j-1
             for(int k=i; k<j; k++){
                 int steps = (a[i-1]*a[j]*a[k]) + dp[i][k] + dp[k+1][j];
                 mini = min(mini, steps);

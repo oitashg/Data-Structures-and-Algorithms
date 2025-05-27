@@ -1,14 +1,18 @@
 #include<iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Solution {
 public:
+    //-------------------------T.C- O(logN)----------------------
+    //--------------------Array should be sorted-----------------
     //--------------------------Iterative------------------------
 
     int search(vector<int> &nums, int target) {
         int n = nums.size();
         int low = 0, high = n-1;
+        
         while(low <= high){
             int mid = low + (high-low)/2;
 
@@ -36,6 +40,7 @@ public:
     int search(vector<int>& nums, int target) {
         int n = nums.size();
         int low = 0, high = n-1;
+        sort(nums.begin(), nums.end());
 
         return f(nums, low, high, target);
     }

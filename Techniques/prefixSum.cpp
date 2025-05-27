@@ -2,7 +2,7 @@
 #include<vector>
 using namespace std;
 
-//-------------------Sum of elements in index range(l,r) odf a vector--------------
+//-------------------Sum of elements in index range(l,r) of a vector--------------
 
 int prefixSumInRange(vector<int>& arr, int l, int r){
     int n = arr.size();
