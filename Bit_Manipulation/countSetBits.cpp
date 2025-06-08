@@ -2,18 +2,19 @@
 using namespace std;
 
 //---------------Count the total number of set bits(1) in a number-------------
-
+//------------------A number n can have atmost log2(n) set bits----------------
 int countSetBits(int n){
     if(n == 0) return 0;
     else return (n & 1) + countSetBits(n >> 1);
 }
 
-//----------------------T.C- O(no. of set bits)-----------------------------------
+//----------------------T.C- O(no. of set bits)(fastest)-----------------------
 
 int countSetBits2(int n){
     int cnt = 0;
 
-    while(n != 0){
+    while(n > 0){
+        //removes last set bit from current number
         n = n & (n-1);
         cnt++;
     }
@@ -39,8 +40,8 @@ int countSetBit4(int n){
     int cnt = 0;
 
     while(n > 0){
-        if(n % 2 == 1) cnt++;
-        n /= 2;
+        if(n & 1) cnt++;
+        n = n >> 1;
     }
 
     return cnt;

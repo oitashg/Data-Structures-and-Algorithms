@@ -23,10 +23,27 @@ int clearBit(int n, int i){
     return ans;
 }
 
+//--------------------------------Clear the last i bits----------------------------------
+
+int clearLastIBits(int n, int i){
+    int ans = (n & (-1 << i));
+    return ans;
+}
+
+//-----------------Clear range of bits i.e clear all the bits from ith to jth index------
+
+int clearRangeOfBits(int n, int i, int j){
+    int a = (-1 << (j + 1)); // Clear all bits from jth index to the end
+    int b = (1 << i) - 1; // Clear all bits from 0th index to ith index
+    int mask = a | b; // Combine both masks
+    int ans = (n & mask); // Clear the bits in the range [i, j]
+    return ans;
+}
+
 //----------Toggle the ith bit i.e if ith bit is 1 flip it to 0 and vice-versa---------
 
 int toggleBit(int n, int i){
-    int ans = (n ^ ~(1 << i));
+    int ans = (n ^ (1 << i));
     return ans;
 }
 
@@ -41,7 +58,7 @@ int clearLastSetBit(int n){
 
 //-------------------------Check if the number is power of 2------------------------------
 // If a number is power of 2, it will always have a single set bit
-// Eg:- n = 16(10000) n = 8(1000)
+// Eg:- n = 16(10000), n = 8(1000)
 
 bool checkPowerOf2(int n){
     if(n & (n-1) == 0) return true;
@@ -55,6 +72,10 @@ bool checkPowerOf2(int n){
 
 //(a << n) == a*(2^n) -> Left shift
 //(a >> n) == a/(2^n) -> Right shift
+
+// 00000000000000000000 -> 0
+// 11111111111111111111 -> -1 not 1
+//So, negation of 0 is -1 and negation of -1 is 0
 
 //--------------------------------------------------------------------------------------------
 
