@@ -33,6 +33,7 @@ int clearLastIBits(int n, int i){
 //-----------------Clear range of bits i.e clear all the bits from ith to jth index------
 
 int clearRangeOfBits(int n, int i, int j){
+    // Here, j < i 
     int a = (-1 << (j + 1)); // Clear all bits from jth index to the end
     int b = (1 << i) - 1; // Clear all bits from 0th index to ith index
     int mask = a | b; // Combine both masks
