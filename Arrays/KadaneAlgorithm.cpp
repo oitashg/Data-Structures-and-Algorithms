@@ -4,7 +4,7 @@ using namespace std;
 
 class Solution {
 public:
-    //---------Maximum Subaray Sum------------------
+    //---------Maximum Subarray Sum-----------------
     //---------Kadanes's Algorithm------------------
 
     int maxSubArray(vector<int>& nums) {

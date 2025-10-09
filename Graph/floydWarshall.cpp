@@ -10,6 +10,10 @@ using namespace std;
 class Solution {
   public:
     //---------------------------------------------------------------------
+	
+	//You are given an weighted directed graph, represented by an adjacency matrix, dist[][] of size n x n, 
+	//where dist[i][j] represents the weight of the edge from node i to node j. If there is no direct edge, 
+	//dist[i][j] is set to a large value (i.e., 1e8) to represent infinity.
 
 	void shortest_distance(vector<vector<int>>&mat){
 	    int n = mat.size();
